@@ -41,7 +41,7 @@ public class Main {
 
     private static void salvarProduto() {
         var url = "jdbc:mysql://localhost:3306/eureka.db";
-        try (var connection = DriverManager.getConnection(url,"root","");){
+        try (var connection = DriverManager.getConnection(url,"root","")){
             System.out.println("Conectado com sucesso!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
