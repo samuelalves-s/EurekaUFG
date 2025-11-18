@@ -1,4 +1,4 @@
-package poo.EurekaUFG.model;
+package poo.EurekaUFG.model.entity;
 
 public enum LocalDeixou {
     REITORIA,
