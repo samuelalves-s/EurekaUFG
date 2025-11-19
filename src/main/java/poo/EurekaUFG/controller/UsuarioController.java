@@ -2,10 +2,7 @@ package poo.EurekaUFG.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import poo.EurekaUFG.model.dto.LoginRequest;
 import poo.EurekaUFG.model.dto.RegisterUser;
@@ -14,6 +11,7 @@ import poo.EurekaUFG.repository.UsuarioRepository;
 import poo.EurekaUFG.service.UsuarioService;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/users")
 public class UsuarioController {
 
