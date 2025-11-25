@@ -41,13 +41,22 @@ export function CreateModal({ closeModal }: ModalProps) {
 
   useEffect(() => {
     if (isSuccess) {
+      <div> deu certo</div>
       closeModal();
     }
   }, [isSuccess, closeModal]);
 
   return (
     <div className="modal-overlay">
-      <div className="modal-body">
+      <div className="modal-body relative">
+        {/* Botão de Fechar (X) */}
+        <button 
+          onClick={closeModal}
+          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold"
+        >
+          &times;
+        </button>
+       
         <h2>Cadastrar Item Perdido</h2>
 
         <input

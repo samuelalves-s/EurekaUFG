@@ -2,12 +2,44 @@ import { useState } from "react";
 import { useItemData } from "../../hooks/useItemData";
 import { CreateModal } from "../../components/item/create-modal/create-modal";
 import type { ItemData } from "../../interface/ItemData";
+//itens falsos para teste:
+import { useQuery } from '@tanstack/react-query';
+import { buscarItens } from '../../services/api'; // <--- Importe o Mock aqui!
+import { Link } from "react-router-dom";
+//incompleto
+import { useAuth } from '../../context/AuthContext';
+import LoginModal from '../../components/item/create-modal/login_modal';
+import CadastroModal from '../../components/item/create-modal/cadastro_modal';
 
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
 
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isCadOpen, setIsCadOpen] = useState(false);
+  const handleSwitchToCadastro = () => {
+    setIsLoginOpen(false);    // Fecha Login
+    setIsCadOpen(true);  // Abre Cadastro
+  };
+  const handleSwitchToLogin = () => {
+    setIsCadOpen(false); // Fecha Cadastro
+    setIsLoginOpen(true);     // Abre Login
+  };
+  const handleItemToLogin = () =>{
+    setIsCreateOpen(false);
+    setIsLoginOpen(true);
+  }
+
   const { data, isLoading, isError } = useItemData();
   const foundItems: ItemData[] = data ?? [];
+
+  const { authenticated, login, user } = useAuth(); // Pega o status e a função login
+  const handleLoginFake = () => {
+    login({
+      nome: "Gabriel Estudante",
+      email: "gabriel@ufg.br",
+      token: "token_falso_123"
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -22,16 +54,46 @@ export default function Home() {
               <h1 className="text-2xl font-bold text-slate-900">Achados &amp; Perdidos</h1>
             </div>
             <div className="flex items-center gap-3">
+              {authenticated? (
               <button
-                className="gap-2 border px-4 py-2 rounded bg-transparent"
+                className="gap-2 border px-4 py-2 rounded bg-transparent cursor-pointer"
                 onClick={() => setIsCreateOpen(true)}
               >
                 <span>➕</span>
                 <span className="hidden sm:inline">Reportar Item</span>
+                
               </button>
-              <button className="px-4 py-2 rounded bg-blue-600 text-white">
-                Minha Conta
+              ):(
+                <button
+                className="gap-2 border px-4 py-2 rounded bg-transparent cursor-pointer"
+                onClick={() => setIsLoginOpen(true)}
+              >
+                <span>➕</span>
+                <span className="hidden sm:inline">Reportar Item</span>
+                
               </button>
+
+              )}
+              <div>
+            {authenticated ? (
+               /* SE ESTIVER LOGADO: Mostra botão Minha Conta e o Nome */
+               <div className="flex gap-4 items-center">
+                 <span>Olá, {user?.nome}</span>
+                 <Link to="/minha-conta">
+                    <button className="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">Minha Conta</button>
+                 </Link>
+               </div>
+            ) : (
+               /* SE ESTIVER DESLOGADO: Mostra botão Entrar */
+               /*onClick={handleLoginFake} className="bg-gray-800 text-white px-4 py-2 rounded"> so que escrito abaixo de button*/
+               <button 
+               className="bg-gray-800 text-white px-4 py-2 rounded"
+               onClick={() => setIsLoginOpen(true)}
+               >
+                  Entrar (Teste)
+               </button>
+            )}
+          </div>
             </div>
           </div>
         </div>
@@ -221,10 +283,26 @@ export default function Home() {
         </div>
       </footer>
 
-      {/* Modal de criação */}
+
+      {isLoginOpen && (
+         <LoginModal 
+         onClose={() => setIsLoginOpen(false)} 
+         onSwitchToCadastro={handleSwitchToCadastro}
+         />
+       )}
+       {isCadOpen && (
+         <CadastroModal 
+            onClose={() => setIsCadOpen(false)} 
+            onSwitchToLogin={handleSwitchToLogin} // Passamos a função de troca
+         />
+       )}
+
+      {//Modal de criação }
+      }
       {isCreateOpen && (
-        <CreateModal closeModal={() => setIsCreateOpen(false)} />
+          <CreateModal closeModal= {() => setIsCreateOpen(false)} />     
       )}
+      
     </div>
   );
 }
