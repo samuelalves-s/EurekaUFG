@@ -10,9 +10,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../../context/AuthContext';
 import LoginModal from '../../components/item/create-modal/login_modal';
 import CadastroModal from '../../components/item/create-modal/cadastro_modal';
+import ItemDetailsModal from '../../components/item/create-modal/item_detalhe_modal';
 
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<ItemData | null>(null);
 
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isCadOpen, setIsCadOpen] = useState(false);
@@ -207,9 +210,20 @@ export default function Home() {
                       <strong>Data:</strong>{" "}
                       {item.data && new Date(item.data).toLocaleDateString("pt-BR")}
                     </div>
-                    <button className="mt-4 w-full rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white">
+                    <button
+                      onClick={() => {
+                        // guarda o item que foi clicado
+                        setSelectedItem({
+                          ...item,
+                          imagem: `http://localhost:8080/${item.imagem}`, // mesma URL que você usa no <img>
+                        });
+                        setShowDetails(true);
+                      }}
+                      className="mt-4 w-full rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white cursor-pointer"
+                    >
                       Ver Detalhes
                     </button>
+
                   </div>
                 </div>
               </div>
@@ -282,6 +296,16 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {showDetails && selectedItem && (
+        <ItemDetailsModal
+          item={selectedItem}
+          onClose={() => {
+            setShowDetails(false);
+            setSelectedItem(null); // limpa o item quando fechar
+          }}
+        />
+      )}
 
 
       {isLoginOpen && (

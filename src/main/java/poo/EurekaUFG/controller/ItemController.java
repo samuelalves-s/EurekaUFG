@@ -43,28 +43,23 @@ public class ItemController {
             @RequestParam("imagem") MultipartFile imagemFile
     ) throws IOException {
 
-        // Validação simples da imagem
         if (imagemFile == null || imagemFile.isEmpty()) {
             return ResponseEntity.badRequest().body("Imagem é obrigatória");
         }
 
-        // Pasta para salvar as imagens
         String uploadDir = "uploads/";
         File dir = new File(uploadDir);
         if (!dir.exists()) {
             dir.mkdirs();
         }
 
-        // Nome único para o arquivo
         String fileName = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename();
         Path filePath = Paths.get(uploadDir, fileName);
         Files.copy(imagemFile.getInputStream(), filePath);
 
-        // Converter os tipos que o DTO espera
-        LocalDeixou localDeixouEnum = LocalDeixou.valueOf(localDeixou); // ex: "REITORIA"
-        LocalDate dataConvertida = LocalDate.parse(data);               // ex: "2025-11-24"
+        LocalDeixou localDeixouEnum = LocalDeixou.valueOf(localDeixou);
+        LocalDate dataConvertida = LocalDate.parse(data);
 
-        // Montar o DTO a partir dos parâmetros recebidos
         ItemRequestDTO dto = new ItemRequestDTO(
                 nome,
                 descricao,
