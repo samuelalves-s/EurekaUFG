@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import poo.EurekaUFG.model.dto.ItemRequestDTO;
+import poo.EurekaUFG.model.dto.ItemResponseDTO;
 import poo.EurekaUFG.model.entity.Item;
 import poo.EurekaUFG.model.entity.LocalDeixou;
 import poo.EurekaUFG.repositories.ItemRepository;
@@ -53,7 +54,7 @@ public class ItemController {
             dir.mkdirs();
         }
 
-        String fileName = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename();
+        String fileName = UUID.randomUUID() + "_" + imagemFile.getOriginalFilename(); // CRIA UM NOME ÚNICO PARA O ARQUIVO DA IMAGEM
         Path filePath = Paths.get(uploadDir, fileName);
         Files.copy(imagemFile.getInputStream(), filePath);
 
