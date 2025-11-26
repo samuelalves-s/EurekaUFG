@@ -20,4 +20,5 @@ public class Usuario {
     private String email;
     private String matricula;
     private String senha;
+    private Boolean adm;
 }

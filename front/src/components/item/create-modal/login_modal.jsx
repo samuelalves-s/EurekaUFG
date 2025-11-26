@@ -50,6 +50,7 @@ const LoginModal = ({ onClose, onSwitchToCadastro }) => {
 
             // 3. Obter os dados REAIS do usuário
             const userData = await response.json();
+            console.log("RESPOSTA DO BACKEND:", userData);
 
             // 4. Se o login foi bem-sucedido: Salvar os dados e fechar o modal
             login(userData);

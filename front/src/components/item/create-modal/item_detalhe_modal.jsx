@@ -1,13 +1,14 @@
 import React from "react";
 import { LocalDeixou } from "../../../enums/LocalDeixou";
 
-const ItemDetailsModal = ({ item, onClose }) => {
+const ItemDetailsModal = ({ item, onClose, isAdm , onEdit}) => {
   if (!item) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="bg-white w-full max-w-3xl p-6 md:p-8 rounded-lg shadow-xl relative animate-fade-in">
-        {/* Botão fechar */}
+        
+        {/* Botão fechar (X) */}
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl font-bold"
@@ -22,6 +23,7 @@ const ItemDetailsModal = ({ item, onClose }) => {
 
         {/* Conteúdo principal */}
         <div className="flex flex-col md:flex-row gap-4">
+          
           {/* Imagem */}
           {item.imagem && (
             <div className="w-full md:w-1/2 flex items-center justify-center">
@@ -36,19 +38,17 @@ const ItemDetailsModal = ({ item, onClose }) => {
           {/* Informações */}
           <div className="w-full md:w-1/2 space-y-2 text-sm">
             <p>
-              <span className="font-semibold text-gray-700 word-brake: break-all">Descrição: </span>
+              <span className="font-semibold text-gray-700">Descrição: </span>
               {item.descricao || "Não informada"}
             </p>
 
             <p>
-              <span className="font-semibold text-gray-700 brake-words">Achado em: </span>
+              <span className="font-semibold text-gray-700">Achado em: </span>
               {item.localAchou || "—"}
             </p>
 
             <p>
-              <span className="font-semibold text-gray-700">
-                Local deixado:
-              </span>{" "}
+              <span className="font-semibold text-gray-700">Local deixado: </span>
               {item.localDeixou ? LocalDeixou[item.localDeixou] : "—"}
             </p>
 
@@ -84,8 +84,19 @@ const ItemDetailsModal = ({ item, onClose }) => {
           </div>
         </div>
 
-        {/* Rodapé com botão de fechar */}
-        <div className="mt-6 flex justify-end">
+        {/* Rodapé */}
+        <div className="mt-6 flex justify-end gap-2">
+
+          {/* Botão Editar — SOMENTE ADM */}
+          {isAdm && (
+            <button
+              onClick={() => onEdit(item)}
+              className="px-4 py-2 rounded bg-yellow-500 hover:bg-yellow-600 text-white text-sm font-semibold"
+            >
+              Editar item
+            </button>
+          )}
+
           <button
             onClick={onClose}
             className="px-4 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold"
@@ -93,6 +104,7 @@ const ItemDetailsModal = ({ item, onClose }) => {
             Fechar
           </button>
         </div>
+        
       </div>
     </div>
   );

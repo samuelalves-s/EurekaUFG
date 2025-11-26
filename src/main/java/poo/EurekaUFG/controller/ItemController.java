@@ -78,4 +78,21 @@ public class ItemController {
 
         return ResponseEntity.ok("Item cadastrado com sucesso!");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Item> atualizarItem(@PathVariable Long id, @RequestBody Item itemAtualizado) {
+        Item item = itemRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Item não encontrado"));
+
+        item.setNome(itemAtualizado.getNome());
+        item.setDescricao(itemAtualizado.getDescricao());
+        item.setLocalAchou(itemAtualizado.getLocalAchou());
+        item.setLocalDeixou(itemAtualizado.getLocalDeixou());
+        item.setStatusItem(itemAtualizado.getStatusItem());
+        // se quiser permitir alterar outros campos, adicione aqui
+
+        Item salvo = itemRepository.save(item);
+        return ResponseEntity.ok(salvo);
+    }
+
 }

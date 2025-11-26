@@ -37,6 +37,7 @@ public class UsuarioService {
         // 3. Criptografa a senha antes de salvar
         String senhaCriptografada = passwordEncoder.encode(dto.getSenha());
         novoUsuario.setSenha(senhaCriptografada);
+        novoUsuario.setAdm(false);
 
         // 4. Salva no banco de dados
         return usuarioRepository.save(novoUsuario);
@@ -61,6 +62,7 @@ public class UsuarioService {
         responseMap.put("token", "TOKEN_AQUI_FUTURAMENTE");
         responseMap.put("usuario", dto.getEmail());
         responseMap.put("nome", usuario.getNome());
+        responseMap.put("adm", usuario.getAdm());
 
         return responseMap; // << Retorna o Map
     }

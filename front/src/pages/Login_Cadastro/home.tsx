@@ -2,17 +2,15 @@ import { useState } from "react";
 import { useItemData } from "../../hooks/useItemData";
 import { CreateModal } from "../../components/item/create-modal/create-modal";
 import type { ItemData } from "../../interface/ItemData";
-//itens falsos para teste:
-import { useQuery } from '@tanstack/react-query';
-import { buscarItens } from '../../services/api'; // <--- Importe o Mock aqui!
 import { Link } from "react-router-dom";
-//incompleto
 import { useAuth } from '../../context/AuthContext';
 import LoginModal from '../../components/item/create-modal/login_modal';
 import CadastroModal from '../../components/item/create-modal/cadastro_modal';
 import ItemDetailsModal from '../../components/item/create-modal/item_detalhe_modal';
 import { LocalDeixou } from "../../enums/LocalDeixou";
-import { StatusItem } from "../../enums/StatusItem"
+import { StatusItem } from "../../enums/StatusItem";
+import EditItemModal from "../../components/item/create-modal/item_edit_modal";
+
 
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -29,10 +27,6 @@ export default function Home() {
     setIsCadOpen(false); // Fecha Cadastro
     setIsLoginOpen(true);     // Abre Login
   };
-  const handleItemToLogin = () =>{
-    setIsCreateOpen(false);
-    setIsLoginOpen(true);
-  }
 
   const { data, isLoading, isError } = useItemData();
 
@@ -47,16 +41,9 @@ export default function Home() {
     (item) => item.statusItem === filtro2
   );
 
-
-
   const { authenticated, login, user } = useAuth(); // Pega o status e a função login
-  const handleLoginFake = () => {
-    login({
-      nome: "Gabriel Estudante",
-      email: "gabriel@ufg.br",
-      token: "token_falso_123"
-    });
-  };
+  const isAdm = user?.adm === true;
+  const [editingItem, setEditingItem] = useState<ItemData | null>(null);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
@@ -318,8 +305,19 @@ export default function Home() {
           item={selectedItem}
           onClose={() => {
             setShowDetails(false);
-            setSelectedItem(null); // limpa o item quando fechar
+            setSelectedItem(null);
           }}
+          isAdm={isAdm}
+          onEdit={(item) => {
+            setEditingItem(item);   // guarda o item que será editado
+            setShowDetails(false);  // fecha o modal de detalhes
+          }}
+        />
+      )}
+      {editingItem && (
+        <EditItemModal
+          item={editingItem}
+          onClose={() => setEditingItem(null)}
         />
       )}
 

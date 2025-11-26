@@ -1,16 +1,17 @@
+// src/pages/Login_Cadastro/login.jsx
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Login() {
-  const [Email, setEmail] = useState("");
-  const [usuario, setUsuario] = useState("");
-  const [matricula, setMatricula] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [mensagem, setMensagem] = useState("");
+
+  const { login } = useAuth(); // vem do AuthContext
 
   const fazerLogin = async (e) => {
     e.preventDefault();
 
-    // Substituir pela URL do seu backend em Java
     const url = "http://localhost:8080/login";
 
     try {
@@ -19,14 +20,34 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Email, usuario, matricula, senha }),
+        // 👇 aqui é importante bater com o DTO do backend (provavelmente email + senha)
+        body: JSON.stringify({
+          email: email,
+          senha: senha,
+        }),
       });
 
-      if (response.ok) {
-        setMensagem("Login realizado com sucesso!");
-      } else {
+      if (!response.ok) {
         setMensagem("Erro ao realizar login. Verifique suas credenciais.");
+        return;
       }
+
+      const data = await response.json();
+      // data esperado: { message, token, usuario, nome, admin }
+
+      // Monta o objeto do usuário para o contexto
+      const userData = {
+        nome: data.nome,
+        email: data.usuario || email,
+        adm: data.adm,      // <-- AQUI entra o ADM
+        token: data.token || null,
+      };
+
+      // Salva no AuthContext e no localStorage
+      login(userData);
+
+      setMensagem("Login realizado com sucesso!");
+      // aqui você pode redirecionar, por ex: navigate("/")
     } catch (error) {
       console.error("Erro na requisição:", error);
       setMensagem("Erro ao conectar com o servidor.");
@@ -42,24 +63,8 @@ export default function Login() {
           style={styles.input}
           type="email"
           placeholder="E-mail"
-          value={Email}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <input
-          style={styles.input}
-          type="text"
-          placeholder="Usuário"
-          value={usuario}
-          onChange={(e) => setUsuario(e.target.value)}
-        />
-
-        <input
-          style={styles.input}
-          type="text"
-          placeholder="Matrícula"
-          value={matricula}
-          onChange={(e) => setMatricula(e.target.value)}
         />
 
         <input
@@ -70,9 +75,10 @@ export default function Login() {
           onChange={(e) => setSenha(e.target.value)}
         />
 
-        <button style={styles.button}>Entrar</button>
+        <button style={styles.button} type="submit">
+          Entrar
+        </button>
 
-        <button style={styles.link}>Logar</button>
         {mensagem && <p>{mensagem}</p>}
       </form>
     </div>
@@ -95,12 +101,12 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     gap: 15,
-    boxShadow: "0 0 10px rgba(0,0,0,0.1)"
+    boxShadow: "0 0 10px rgba(0,0,0,0.1)",
   },
   input: {
     padding: 10,
     borderRadius: 4,
-    border: "1px solid #ccc"
+    border: "1px solid #ccc",
   },
   button: {
     padding: 10,
@@ -108,15 +114,6 @@ const styles = {
     color: "#fff",
     border: "none",
     borderRadius: 4,
-    cursor: "pointer"
+    cursor: "pointer",
   },
-
-  link:{
-    padding: 10,
-    border: "none",
-    background: "#0066ffff",
-    color: "#fff",
-    cursor: "pointer"
-  }
-
 };
