@@ -1,4 +1,5 @@
 import { LocalDeixou } from "../enums/LocalDeixou";
+import { StatusItem } from "../enums/StatusItem";
 
 export interface ItemData {
     id?: number;
@@ -9,4 +10,5 @@ export interface ItemData {
     localDeixou: LocalDeixou;
     data: string;
     matriculaAchou: string;
+    statusItem: StatusItem;
 }

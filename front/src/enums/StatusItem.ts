@@ -1,0 +1,5 @@
+export enum StatusItem {
+  ENCONTRADO = "ENCONTRADO",
+  DEVOLVIDO = "DEVOLVIDO",
+  CANCELADO = "CANCELADO"
+}

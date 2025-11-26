@@ -12,6 +12,7 @@ import LoginModal from '../../components/item/create-modal/login_modal';
 import CadastroModal from '../../components/item/create-modal/cadastro_modal';
 import ItemDetailsModal from '../../components/item/create-modal/item_detalhe_modal';
 import { LocalDeixou } from "../../enums/LocalDeixou";
+import { StatusItem } from "../../enums/StatusItem"
 
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -34,7 +35,19 @@ export default function Home() {
   }
 
   const { data, isLoading, isError } = useItemData();
+
+  // Forma um array com todos os itens do backend
   const foundItems: ItemData[] = data ?? [];
+  const filtro1 = StatusItem.ENCONTRADO;
+  const itensEncontrados = foundItems.filter(
+    (item) => item.statusItem === filtro1
+  );
+  const filtro2 = StatusItem.DEVOLVIDO;
+  const itensDevolvidos = foundItems.filter(
+    (item) => item.statusItem === filtro2
+  );
+
+
 
   const { authenticated, login, user } = useAuth(); // Pega o status e a função login
   const handleLoginFake = () => {
@@ -137,12 +150,14 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="rounded-lg bg-blue-50 p-6 text-center">
               <p className="text-3xl font-bold text-blue-600">
-                {isLoading ? "..." : foundItems.length}
+                {isLoading ? "..." : itensEncontrados.length}
               </p>
               <p className="mt-2 text-sm text-slate-600">Itens Encontrados</p>
             </div>
             <div className="rounded-lg bg-green-50 p-6 text-center">
-              <p className="text-3xl font-bold text-green-600">127</p>
+              <p className="text-3xl font-bold text-green-600">
+                {isLoading ? "..." : itensDevolvidos.length}
+              </p>
               <p className="mt-2 text-sm text-slate-600">Devolvidos ao Dono</p>
             </div>
             <div className="rounded-lg bg-purple-50 p-6 text-center">
@@ -170,14 +185,14 @@ export default function Home() {
           </p>
         )}
 
-        {!isLoading && !isError && foundItems.length === 0 && (
+        {!isLoading && !isError && itensEncontrados.length === 0 && (
           <p className="text-slate-600">Nenhum item encontrado até o momento.</p>
         )}
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {!isLoading &&
             !isError &&
-            foundItems.map((item) => (
+            itensEncontrados.map((item) => (
               <div
                 key={item.id}
                 className="overflow-hidden rounded-lg border bg-white shadow-sm"
