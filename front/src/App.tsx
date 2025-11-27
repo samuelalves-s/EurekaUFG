@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Home from "./pages/Login_Cadastro/home";
 import Login from "./pages/Login_Cadastro/login";
 import Profile from "./pages/profile";
+import Devolvidos from "./pages/Login_Cadastro/devolvidos";
 
 function App() {
     return(
@@ -21,7 +22,7 @@ function App() {
                 <Route path="/minha-conta" element={<Profile />} />
 
                 {/* Rota de Teste */}
-                <Route path="/teste" element={<h1>Router Funcionando! 🚀</h1>} />
+                <Route path="/devolvidos" element={<Devolvidos />} />
             </Routes>
         </Router>
     );

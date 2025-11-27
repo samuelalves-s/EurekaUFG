@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import avatarPadrao from "../../assets/pessoa.jpg";
 
+
 const Profile = () => {
     const { logout, user } = useAuth();
     const navigate = useNavigate();

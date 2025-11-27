@@ -11,6 +11,7 @@ import { LocalDeixou } from "../../enums/LocalDeixou";
 import { StatusItem } from "../../enums/StatusItem";
 import EditItemModal from "../../components/item/create-modal/item_edit_modal";
 
+
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -111,52 +112,24 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="border-b border-slate-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-balance text-3xl font-bold text-slate-900 sm:text-4xl">
-              Recupere seus Pertences Perdidos
-            </h2>
-            <p className="mt-4 text-lg text-slate-600">
-              Consulte todos os itens encontrados no campus UFG Samambaia. Seu objeto pode estar aqui!
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
-              <button
-                className="px-6 py-3 rounded bg-blue-600 text-white"
-                onClick={() => {
-                  const section = document.getElementById("grid-itens");
-                  section?.scrollIntoView({ behavior: "smooth" });
-                }}
-              >
-                Buscar Itens
-              </button>
-              <button className="px-6 py-3 rounded border">
-                Como Funciona?
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Stats Section */}
       <section className="border-b border-slate-200 bg-white">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="grid gap-4 sm:grid-cols-3">
+            <Link to="/home">
             <div className="rounded-lg bg-blue-50 hover:bg-blue-200 p-6 text-center">
               <p className="text-3xl font-bold text-blue-600">
                 {isLoading ? "..." : itensEncontrados.length}
               </p>
               <p className="mt-2 text-sm text-slate-600">Itens Encontrados</p>
             </div>
-            <Link to="/devolvidos">
-            <div className="rounded-lg bg-green-50 hover:bg-green-200 p-6 text-center cursor-pointer">
+            </Link>
+            <div className="rounded-lg bg-green-50 hover:bg-green-200 p-6 text-center">
               <p className="text-3xl font-bold text-green-600">
                 {isLoading ? "..." : itensDevolvidos.length}
               </p>
               <p className="mt-2 text-sm text-slate-600">Devolvidos ao Dono</p>
             </div>
-            </Link>
             <div className="rounded-lg bg-purple-50 hover:bg-purple-200 p-6 text-center">
               <p className="text-3xl font-bold text-purple-600">24/7</p>
               <p className="mt-2 text-sm text-slate-600">Disponível</p>
@@ -171,7 +144,7 @@ export default function Home() {
         className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
       >
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-slate-900">Itens Encontrados Recentemente</h2>
+          <h2 className="text-2xl font-bold text-slate-900">Itens Devolvidos Recentemente</h2>
           <p className="mt-2 text-slate-600">Novos itens são adicionados diariamente</p>
         </div>
 
@@ -182,14 +155,14 @@ export default function Home() {
           </p>
         )}
 
-        {!isLoading && !isError && itensEncontrados.length === 0 && (
+        {!isLoading && !isError && itensDevolvidos.length === 0 && (
           <p className="text-slate-600">Nenhum item encontrado até o momento.</p>
         )}
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {!isLoading &&
             !isError &&
-            itensEncontrados.map((item) => (
+            itensDevolvidos.map((item) => (
               <div
                 key={item.id}
                 className="overflow-hidden rounded-lg border bg-white shadow-sm"
