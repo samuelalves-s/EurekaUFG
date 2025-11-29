@@ -43,7 +43,7 @@ const ItemDetailsModal = ({ item, onClose, isAdm , onEdit}) => {
             </p>
 
             <p>
-              <span className="font-semibold text-gray-700">Achado em: </span>
+              <span className="font-semibold text-gray-700">Local encontrado: </span>
               {item.localAchou || "—"}
             </p>
 
@@ -54,8 +54,11 @@ const ItemDetailsModal = ({ item, onClose, isAdm , onEdit}) => {
 
             <p>
               <span className="font-semibold text-gray-700">Data: </span>
-              {item.data || "—"}
+              {item.data
+                        ? item.data.split("T")[0].split("-").reverse().join("/")
+                        : "—"}
             </p>
+
 
             <p>
               <span className="font-semibold text-gray-700">
