@@ -10,6 +10,8 @@ import ItemDetailsModal from '../components/item/create-modal/item_detalhe_modal
 import { LocalDeixou } from "../enums/LocalDeixou";
 import { StatusItem } from "../enums/StatusItem";
 import EditItemModal from "../components/item/create-modal/item_edit_modal";
+import logoImg from "../assets/logo.png";
+
 
 export default function Home() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
@@ -52,15 +54,19 @@ export default function Home() {
           <div className="flex items-center justify-between">
 
 
-            <div className="flex items-center gap-2">
-              <div className="rounded-lg bg-blue-600 p-2">
-                <span role="img" aria-label="buscar">🔍</span>
+              <div className="flex items-center gap-3"> {/* aumenta o espaço entre logo e título */}
+                  <img
+                      src={logoImg}
+                      alt="Logo"
+                      className="w-20 h-20 object-contain" // aumenta a logo e mantém proporção
+                  />
+                  <h1 className="text-3xl font-bold text-slate-900">Achados &amp; Perdidos</h1>
               </div>
-              <h1 className="text-2xl font-bold text-slate-900">Achados &amp; Perdidos</h1>
-            </div>
 
 
-            <div className="flex items-center gap-3">
+
+
+              <div className="flex items-center gap-3">
               {authenticated? (
               <button
                 className="gap-2 border px-4 py-2 rounded bg-transparent cursor-pointer"
