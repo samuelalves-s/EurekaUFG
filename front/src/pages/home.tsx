@@ -58,7 +58,7 @@ export default function Home() {
                   <img
                       src={logoImg}
                       alt="Logo"
-                      className="w-20 h-20 object-contain" // aumenta a logo e mantém proporção
+                      className="w-20 h-14 object-contain" // aumenta a logo e mantém proporção
                   />
                   <h1 className="text-3xl font-bold text-slate-900">Achados &amp; Perdidos</h1>
               </div>
@@ -108,7 +108,7 @@ export default function Home() {
                className="bg-gray-800 text-white px-4 py-2 rounded cursor-pointer"
                onClick={() => setIsLoginOpen(true)}
                >
-                  Entrar (Teste)
+                  Entrar
                </button>
             )}
           </div>
