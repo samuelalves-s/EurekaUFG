@@ -49,6 +49,8 @@ Localize o arquivo de configuração em:
 src/main/resources/application.properties
 ```
 
+No arquivo src/main/java/resources/application.properties:
+
 Edite conforme o seu ambiente:
 
 ```bash
