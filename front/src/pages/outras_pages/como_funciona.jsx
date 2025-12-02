@@ -72,28 +72,6 @@ const HowItWorks = () => {
             </div>
         </div>
 
-        {/* 3. Seção de Dúvidas Frequentes (FAQ) */}
-        {/* <div className="mt-16 max-w-3xl mx-auto">
-             <h2 className="text-2xl font-bold text-gray-800 text-center mb-8">Perguntas Frequentes</h2>
-            
-            <div className="space-y-4">
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="font-bold text-gray-800 mb-2">Quanto tempo os itens ficam guardados?</h3>
-                    <p className="text-gray-600 text-sm">Os itens permanecem no setor de Achados e Perdidos por até 90 dias. Após esse período, podem ser doados.</p>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="font-bold text-gray-800 mb-2">Preciso pagar para retirar?</h3>
-                    <p className="text-gray-600 text-sm">Não! O serviço é totalmente gratuito para alunos, servidores e visitantes da UFG.</p>
-                </div>
-
-                <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
-                    <h3 className="font-bold text-gray-800 mb-2">Onde fica o setor principal?</h3>
-                    <p className="text-gray-600 text-sm">Existem pontos em cada faculdade, mas a central fica no Prédio da Segurança, próximo à Reitoria.</p>
-                </div>
-            </div>
-        </div> */}
-
         {/* 4. Botão de Voltar */}
         <div className="text-center mt-12">
             <Link to="/">

@@ -3,23 +3,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Contact = () => {
-//   const [formData, setFormData] = useState({
-//     nome: '',
-//     email: '',
-//     assunto: '',
-//     mensagem: ''
-//   });
-
-//   const handleChange = (e) => {
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-//   };
-
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Aqui você conectaria com o backend para enviar o email
-//     alert("Mensagem enviada com sucesso! Entraremos em contato em breve.");
-//     setFormData({ nome: '', email: '', assunto: '', mensagem: '' });
-//   };
 
   return (
     <div className="min-h-screen bg-gray-50 pb-12">
@@ -85,63 +68,6 @@ const Contact = () => {
                     </div>
                 </div>
             </div>
-
-            {/* COLUNA DA DIREITA: Formulário de Mensagem */}
-            {/* <div className="bg-white rounded-lg shadow-lg p-8">
-                <h2 className="text-2xl font-bold text-gray-800 mb-6">Envie uma Mensagem</h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                            <input 
-                                type="text" name="nome" required 
-                                value={formData.nome} onChange={handleChange}
-                                className="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                                placeholder="Seu nome"
-                            />
-                        </div>
-                        <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                            <input 
-                                type="email" name="email" required 
-                                value={formData.email} onChange={handleChange}
-                                className="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none"
-                                placeholder="seu@email.com"
-                            />
-                        </div>
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Assunto</label>
-                        <select 
-                            name="assunto" 
-                            value={formData.assunto} onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none bg-white"
-                        >
-                            <option value="">Selecione um assunto...</option>
-                            <option value="duvida">Dúvida sobre item</option>
-                            <option value="sugestao">Sugestão / Reclamação</option>
-                            <option value="parceria">Outros assuntos</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Mensagem</label>
-                        <textarea 
-                            name="mensagem" rows="4" required 
-                            value={formData.mensagem} onChange={handleChange}
-                            className="w-full border border-gray-300 p-2 rounded focus:ring-2 focus:ring-blue-500 outline-none resize-none"
-                            placeholder="Como podemos te ajudar?"
-                        ></textarea>
-                    </div>
-
-                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded transition duration-200">
-                        Enviar Mensagem
-                    </button>
-                </form>
-            </div> */}
-
         </div>
       </div>
 

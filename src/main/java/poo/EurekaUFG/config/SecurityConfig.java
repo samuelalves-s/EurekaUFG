@@ -9,10 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class SecurityConfig {
 
-    /**
-     * Define o Bean do PasswordEncoder.
-     * Este arquivo NÃO DEVE existir ao mesmo tempo que WebSecurityConfig.java.
-     */
+    // Define o Bean do PasswordEncoder.
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

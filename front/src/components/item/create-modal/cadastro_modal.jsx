@@ -22,7 +22,7 @@ const RegisterModal = ({ onClose, onSwitchToLogin }) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e) => { // 🚨 Tornar a função assíncrona é crucial para o fetch
+    const handleSubmit = async (e) => { // Tornar a função assíncrona é crucial para o fetch
         e.preventDefault();
         setError(''); // Limpa erros anteriores
         setIsSubmitting(true); // Começa o envio
@@ -87,7 +87,7 @@ const RegisterModal = ({ onClose, onSwitchToLogin }) => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
 
-                    {/* 🚨 Área para mostrar erro */}
+                    {/* Área para mostrar erro */}
                     {error && (
                         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded relative text-sm" role="alert">
                             {error}

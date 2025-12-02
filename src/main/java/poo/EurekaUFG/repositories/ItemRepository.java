@@ -4,5 +4,4 @@
  import poo.EurekaUFG.model.entity.Item;
 
  public interface ItemRepository extends JpaRepository<Item,Long> {
-
  }

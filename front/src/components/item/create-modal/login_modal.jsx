@@ -43,10 +43,10 @@ const LoginModal = ({ onClose, onSwitchToCadastro }) => {
 
             console.log("RESPOSTA DO BACKEND:", userData);
 
-// ✅ Envia o objeto correto para login()
+            // Envia o objeto correto para login()
             login(userData);
 
-// ✅ Salva token se houver
+            // Salva token se houver
             if (token) localStorage.setItem('token', token);
 
             onClose();

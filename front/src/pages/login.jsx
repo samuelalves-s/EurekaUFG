@@ -20,7 +20,7 @@ export default function Login() {
         headers: {
           "Content-Type": "application/json",
         },
-        // 👇 aqui é importante bater com o DTO do backend (provavelmente email + senha)
+        // aqui é importante bater com o DTO do backend (provavelmente email + senha)
         body: JSON.stringify({
           email: email,
           senha: senha,

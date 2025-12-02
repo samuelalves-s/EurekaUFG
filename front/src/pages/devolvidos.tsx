@@ -98,7 +98,6 @@ export default function Home() {
                 </div>
             ) : (
                /* SE ESTIVER DESLOGADO: Mostra botão Entrar */
-               /*onClick={handleLoginFake} className="bg-gray-800 text-white px-4 py-2 rounded"> so que escrito abaixo de button*/
                <button 
                className="bg-gray-800 text-white px-4 py-2 rounded"
                onClick={() => setIsLoginOpen(true)}

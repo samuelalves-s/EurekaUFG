@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     // Função de Login (Salva no estado e no navegador)
-    // ✅ Alterado: só recebe o objeto correto do usuário
+    // Alterado: só recebe o objeto correto do usuário
     const login = (userData) => {
         setUser(userData);
         localStorage.setItem('u_user', JSON.stringify(userData));
