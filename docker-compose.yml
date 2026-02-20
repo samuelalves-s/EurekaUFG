@@ -28,7 +28,7 @@ services:
   frontend:
     build: ./front
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       - backend
     shm_size: '2gb'
